@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="Status">Status :</button>
+    <input type="text" name="" id="inp">
+    <button id="notificationButton">Click me for a notification</button>
+
+    <script>
+        let val = document.getElementById('inp')
+
+        document.getElementById('Status').addEventListener('mouseleave',getStatus)
+
+        function getStatus() {
+            let target = document.getElementById("Status")
+            if (navigator.onLine) {
+                // target.innerHTML="Status : Online"
+                val.value = "User is Online"
+                val.style.color = "green";
+            } else {
+                target.innerHTML = "Offline"
+                val.value = "User is Offline"
+                target.style.color = "red";
+            }
+        }
+        document.getElementById('notificationButton').addEventListener('click', sendNoti())
+
+
+   function sendNoti(){
+console.log("sendNoti")
+            Notification.requestPermission().then(permission => {
+                if (permission === 'granted') {
+                    const notification = new Notification('Hello, World!', {
+                        body: 'This is a sample notification.',
+                    })
+
+                  
+                }
+            })
+   }
+
+        
+    </script>
+</body>
+</html>
